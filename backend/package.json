@@ -1,4 +1,7 @@
 {
+  "scripts": {
+  "start": "node server.js"
+},
   "dependencies": {
     "@octokit/rest": "^21.0.2",
     "bcryptjs": "^2.4.3",
