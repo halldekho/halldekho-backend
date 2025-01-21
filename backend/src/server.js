@@ -1,19 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const User = require('./models/User');
-const { generateToken } = require('./utils/jwt');
-const { authMiddleware, roleMiddleware } = require('./middleware/auth');
-const ownerRoutes = require('./routes/ownerRoutes'); 
-const ownerHallsRoutes = require('./routes/allHalls')
-const deleteHall = require('./routes/deleteHall')
-const updateHall = require('./routes/updateHall')
-const issueReq = require('./routes/issueReqUser')
-const listAllReq = require('./routes/listAllReqOwner')
-const resByOwner = require('./routes/responseByOwner')
-const listAllHalls = require('./routes/listAllHalls')
-const hallDetail = require('./routes/hallDetail')
-const reviewRoute = require('./routes/reviews')
-const ratingRoute = require('./routes/ratingRoutes')
+const User = require('../models/User');
+const { generateToken } = require('../utils/jwt');
+const { authMiddleware, roleMiddleware } = require('../middleware/auth');
+const ownerRoutes = require('../routes/ownerRoutes'); 
+const ownerHallsRoutes = require('../routes/allHalls')
+const deleteHall = require('../routes/deleteHall')
+const updateHall = require('../routes/updateHall')
+const issueReq = require('../routes/issueReqUser')
+const listAllReq = require('../routes/listAllReqOwner')
+const resByOwner = require('../routes/responseByOwner')
+const listAllHalls = require('../routes/listAllHalls')
+const hallDetail = require('../routes/hallDetail')
+const reviewRoute = require('../routes/reviews')
+const ratingRoute = require('../routes/ratingRoutes')
 require('dotenv').config();
 
 const bcrypt = require('bcryptjs');
