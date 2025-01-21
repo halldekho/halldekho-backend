@@ -1,6 +1,7 @@
 {
+  "main":"app.js",
   "scripts": {
-  "start": "node server.js"
+  "start": "node app.js"
 },
   "dependencies": {
     "@octokit/rest": "^21.0.2",

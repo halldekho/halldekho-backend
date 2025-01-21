@@ -18,10 +18,11 @@ require('dotenv').config();
 
 const bcrypt = require('bcryptjs');
 const cors = require('cors'); // Import CORS middleware
+console.log("My name is", process.env.myname);
 
 const app = express();
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware for parsing JSON request bodies
 app.use(express.json());
