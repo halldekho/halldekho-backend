@@ -1,6 +1,3 @@
-const {
-  type,
-} = require("@testing-library/user-event/dist/cjs/utility/type.js");
 const mongoose = require("mongoose");
 
 const hallSchema = new mongoose.Schema(
