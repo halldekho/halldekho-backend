@@ -101,33 +101,37 @@ app.post("/signup", async (req, res) => {
       to: email,
       subject: "Welcome to Hall Dekho!",
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
-          <img src="https://raw.githubusercontent.com/halldekho/carousel-images/master/halls/halldekho-high-resolution-logo.png" alt="Welcome to Hall Dekho" style="width: 100%; border-radius: 10px 10px 0 0;" />
-          <div style="padding: 20px;">
-            <h1 style="color: #333; text-align: center;">${greeting}!</h1>
-            <p style="font-size: 16px; color: #555; text-align: center;">
-              Welcome to Hall Dekho! We're thrilled to have you on board. Our platform is designed to make finding or listing event halls easier than ever.
-            </p>
-            <div style="text-align: center; margin: 20px 0;">
-              <a href="${
-                process.env.FRONTEND_URL
-              }/all-halls" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; font-size: 16px;">Browse Halls</a>
-              ${
-                role === "owner"
-                  ? `<a href="${process.env.FRONTEND_URL}/add-property" style="display: inline-block; margin-left: 10px; padding: 10px 20px; background-color: #28a745; color: #fff; text-decoration: none; border-radius: 5px; font-size: 16px;">List Your Hall</a>`
-                  : ""
-              }
-            </div>
-            <p style="font-size: 16px; color: #555; text-align: center;">
-              If you have any questions or need assistance, do not hesitate to reach out. Our team is here to support you and ensure you have the best experience with Hall Dekho.
-            </p>
-            <p style="text-align: center; color: #888; font-size: 14px;">
-              Thank you,<br />
-              <strong>Hall Dekho Team</strong>
-            </p>
-          </div>
+  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+    <img src="https://raw.githubusercontent.com/halldekho/carousel-images/master/halls/halldekho-high-resolution-logo.png" alt="Welcome to Hall Dekho" style="width: 100%; border-radius: 10px 10px 0 0;" />
+    <div style="padding: 20px;">
+      <h1 style="color: #333; text-align: center;">${greeting}!</h1>
+      <p style="font-size: 16px; color: #555; text-align: center;">
+        Welcome to Hall Dekho! We're thrilled to have you on board. Our platform is designed to make finding or listing event halls easier than ever.
+      </p>
+      <div style="text-align: center; margin: 20px 0;">
+        <div style="margin-bottom: 10px;">
+          <a href="${
+            process.env.FRONTEND_URL
+          }/all-halls" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; font-size: 16px;">Browse Halls</a>
         </div>
-      `,
+        ${
+          role === "owner"
+            ? `<div style="margin-bottom: 10px;">
+                 <a href="${process.env.FRONTEND_URL}/add-property" style="display: inline-block; padding: 10px 20px; background-color: #28a745; color: #fff; text-decoration: none; border-radius: 5px; font-size: 16px;">List Your Hall</a>
+               </div>`
+            : ""
+        }
+      </div>
+      <p style="font-size: 16px; color: #555; text-align: center;">
+        If you have any questions or need assistance, do not hesitate to reach out. Our team is here to support you and ensure you have the best experience with Hall Dekho.
+      </p>
+      <p style="text-align: center; color: #888; font-size: 14px;">
+        Thank you,<br />
+        <strong>Hall Dekho Team</strong>
+      </p>
+    </div>
+  </div>
+`,
     };
 
     // Send the email
