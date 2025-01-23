@@ -14,6 +14,7 @@ const listAllHalls = require('./routes/listAllHalls')
 const hallDetail = require('./routes/hallDetail')
 const reviewRoute = require('./routes/reviews')
 const ratingRoute = require('./routes/ratingRoutes')
+const resetPwdRoute = require('./routes/resetPwdRoute')
 require('dotenv').config();
 
 const bcrypt = require('bcryptjs');
@@ -164,6 +165,9 @@ app.use('/user', ratingRoute);
 
 // hall detail 
 app.use('/user',hallDetail);
+
+// reset password
+app.use('/', resetPwdRoute);
 
 // Route not found handler
 app.use((req, res) => {
