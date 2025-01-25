@@ -16,6 +16,8 @@ const reviewRoute = require("./routes/reviews");
 const ratingRoute = require("./routes/ratingRoutes");
 const resetPwdRoute = require("./routes/resetPwdRoute");
 const nodemailer = require("nodemailer");
+const isSuperAdmin = require('./middleware/isSuperAdmin'); 
+const promotionalEmail = require('./routes/promotionalEmail');
 require("dotenv").config();
 
 const bcrypt = require("bcryptjs");
@@ -236,6 +238,9 @@ app.use("/user", hallDetail);
 
 // reset password
 app.use("/", resetPwdRoute);
+
+//super admin route - promotional emails
+app.use('/super-admin', promotionalEmail);
 
 // Route not found handler
 app.use((req, res) => {
