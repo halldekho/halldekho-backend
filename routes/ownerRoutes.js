@@ -39,6 +39,7 @@ router.post(
         outsideAlcohol,
         djPolicy,
         phone,
+        location,
       } = req.body;
       const ownerId = req.user?.id;
 
@@ -81,6 +82,24 @@ router.post(
       ) {
         return res.status(400).json({
           msg: 'Numeric fields (plate prices, accommodation, venue establishment year, and room price) must be valid numbers.',
+        });
+      }
+
+
+      let parsedLocation;
+      try {
+        parsedLocation = JSON.parse(location);
+        if (
+          typeof parsedLocation !== 'object' ||
+          !parsedLocation.address ||
+          !parsedLocation.city ||
+          !parsedLocation.state
+        ) {
+          throw new Error();
+        }
+      } catch (error) {
+        return res.status(400).json({
+          msg: 'Invalid location format. Location should be a JSON object with address, city, and state fields.',
         });
       }
 
@@ -139,6 +158,7 @@ router.post(
         djPolicy: djPolicyArray,
         owner: ownerId,
         phone,
+        location: parsedLocation,
       });
 
       await hall.save();
