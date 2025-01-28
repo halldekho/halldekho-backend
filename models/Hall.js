@@ -13,6 +13,9 @@ const hallSchema = new mongoose.Schema(
     imagesUrl: {
       type: [String],
     },
+    menuURL: {
+      type: [String], // Added menu attribute
+    },
     accommodation: {
       type: Number,
       required: true,
