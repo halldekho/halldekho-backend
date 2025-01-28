@@ -151,8 +151,67 @@ app.post("/signup", async (req, res) => {
 });
 
 // Login Route
-app.post("/login", async (req, res) => {
+// app.post("/login", async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+
+//     const user = await User.findUserByEmail(email);
+//     if (!user) {
+//       return res.status(400).json({ msg: "User not found" });
+//     }
+
+//     // Check password
+//     const isMatch = await bcrypt.compare(password, user.password);
+//     if (!isMatch) {
+//       return res.status(400).json({ msg: "Invalid credentials" });
+//     }
+
+//     const token = generateToken(user);
+
+//     let redirectUrl = "/all-halls";
+//     if (user.role === "owner") {
+//       redirectUrl = "/add-property";
+//     }
+
+//     res.status(200).json({
+//       msg: "Login successful",
+//       token,
+//       redirectUrl,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ msg: "Server error" });
+//   }
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.post("/login",isSuperAdmin, async (req, res) => {
   try {
+
+    console.log('Login Route:', req.user);
+
+    // If the user is superadmin, handle the superadmin login
+    if (req.user && req.user.role === 'superadmin') {
+      const token = generateToken({ email: req.user.email, role: req.user.role });
+      return res.status(200).json({
+        msg: "Login successful",
+        token,
+        redirectUrl: "/superadmin", // Redirect to super admin page
+      });
+    }
+
     const { email, password } = req.body;
 
     const user = await User.findUserByEmail(email);
@@ -183,6 +242,24 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Dashboard Routes
 app.get(
