@@ -8,6 +8,7 @@ const ownerHallsRoutes = require("./routes/allHalls");
 const deleteHall = require("./routes/deleteHall");
 const updateHall = require("./routes/updateHall");
 const issueReq = require("./routes/issueReqUser");
+const visitReq = require("./routes/visitRequest");
 const listAllReq = require("./routes/listAllReqOwner");
 const resByOwner = require("./routes/responseByOwner");
 const listAllHalls = require("./routes/listAllHalls");
@@ -300,6 +301,9 @@ app.use("/owner", resByOwner);
 
 // issue req by user - user
 app.use("/user", issueReq);
+
+// visit req by user - user
+app.use("/user", visitReq);
 
 // list all halls - user
 app.use("/user", listAllHalls);
