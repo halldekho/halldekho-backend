@@ -19,6 +19,7 @@ const resetPwdRoute = require("./routes/resetPwdRoute");
 const nodemailer = require("nodemailer");
 const isSuperAdmin = require('./middleware/isSuperAdmin'); 
 const promotionalEmail = require('./routes/promotionalEmail');
+const blogRoutes = require("./routes/blogRoutes");
 require("dotenv").config();
 
 const bcrypt = require("bcryptjs");
@@ -152,8 +153,22 @@ app.post("/signup", async (req, res) => {
 });
 
 // Login Route
-// app.post("/login", async (req, res) => {
+
+// app.post("/login",isSuperAdmin, async (req, res) => {
 //   try {
+
+//     console.log('Login Route:', req.user);
+
+//     // If the user is superadmin, handle the superadmin login
+//     if (req.user && req.user.role === 'superadmin') {
+//       const token = generateToken({ email: req.user.email, role: req.user.role });
+//       return res.status(200).json({
+//         msg: "Login successful",
+//         token,
+//         redirectUrl: "/superadmin", // Redirect to super admin page
+//       });
+//     }
+
 //     const { email, password } = req.body;
 
 //     const user = await User.findUserByEmail(email);
@@ -198,21 +213,32 @@ app.post("/signup", async (req, res) => {
 
 
 
-app.post("/login",isSuperAdmin, async (req, res) => {
+
+
+app.post("/login", isSuperAdmin, async (req, res) => {
   try {
+    // ✅ Super Admin Login
+    if (req.user && req.user.role === "superadmin") {
+      const superAdminId = process.env.SUPER_ADMIN_ID;
 
-    console.log('Login Route:', req.user);
+      if (!superAdminId || !mongoose.Types.ObjectId.isValid(superAdminId)) {
+        return res.status(500).json({ msg: "SUPER_ADMIN_ID is missing or invalid" });
+      }
 
-    // If the user is superadmin, handle the superadmin login
-    if (req.user && req.user.role === 'superadmin') {
-      const token = generateToken({ email: req.user.email, role: req.user.role });
+      const token = generateToken({
+        _id: new mongoose.Types.ObjectId(superAdminId),
+        role: req.user.role,
+        email: req.user.email,
+      });
+
       return res.status(200).json({
-        msg: "Login successful",
+        msg: "Super Admin login successful",
         token,
-        redirectUrl: "/superadmin", // Redirect to super admin page
+        redirectUrl: "/superadmin",
       });
     }
 
+    // ✅ Normal User Login
     const { email, password } = req.body;
 
     const user = await User.findUserByEmail(email);
@@ -220,7 +246,6 @@ app.post("/login",isSuperAdmin, async (req, res) => {
       return res.status(400).json({ msg: "User not found" });
     }
 
-    // Check password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ msg: "Invalid credentials" });
@@ -238,11 +263,13 @@ app.post("/login",isSuperAdmin, async (req, res) => {
       token,
       redirectUrl,
     });
+
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ msg: "Server error" });
+    console.error("Login error:", err.message);
+    res.status(500).json({ msg: "Server error", error: err.message });
   }
 });
+
 
 
 
@@ -322,6 +349,10 @@ app.use("/", resetPwdRoute);
 
 //super admin route - promotional emails
 app.use('/super-admin', promotionalEmail);
+
+//super admin route - blog creation
+app.use('/super-admin', blogRoutes);
+
 
 // Route not found handler
 app.use((req, res) => {
