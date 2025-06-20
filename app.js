@@ -20,6 +20,7 @@ const nodemailer = require("nodemailer");
 const isSuperAdmin = require('./middleware/isSuperAdmin'); 
 const promotionalEmail = require('./routes/promotionalEmail');
 const blogRoutes = require("./routes/blogRoutes");
+const chatbot = require("./routes/chatbot");
 require("dotenv").config();
 
 const bcrypt = require("bcryptjs");
@@ -325,6 +326,9 @@ app.use("/owner", listAllReq);
 
 // response by owner - owner
 app.use("/owner", resByOwner);
+
+//AI chatbot
+app.use("/user", chatbot);
 
 // issue req by user - user
 app.use("/user", issueReq);
