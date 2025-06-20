@@ -16,6 +16,9 @@ function getHalldekhoReply(message) {
   if (lower.includes("who is the founder of halldekho") || lower.includes("founder of halldekho") || lower.includes("founder of hall dekho")) {
     return "Halldekho was founded by Naman Gujral.";
   }
+  if (lower.includes("who is naman gujral") || lower.includes("who is naman") || lower.includes("naman") || lower.includes("naman gujral")) {
+    return "Naman Gujral is the founder and CEO of Halldekho.";
+  }
   if (lower.includes("who invented you")) {
     return "A team at Halldekho invented me.";
   }
