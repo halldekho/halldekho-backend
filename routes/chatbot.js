@@ -13,7 +13,7 @@ function getHalldekhoReply(message) {
   if (lower.includes("what is halldekho")) {
     return "Halldekho is an online platform to discover, compare, and book marriage halls with ease.";
   }
-  if (lower.includes("who is the founder")) {
+  if (lower.includes("who is the founder of halldekho") || lower.includes("founder of halldekho") || lower.includes("founder of hall dekho")) {
     return "Halldekho was founded by Naman Gujral.";
   }
   if (lower.includes("who invented you")) {
