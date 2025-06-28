@@ -21,11 +21,11 @@ const isSuperAdmin = require('./middleware/isSuperAdmin');
 const promotionalEmail = require('./routes/promotionalEmail');
 const blogRoutes = require("./routes/blogRoutes");
 const chatbot = require("./routes/chatbot");
+const booking = require("./routes/booking");
 require("dotenv").config();
 
 const bcrypt = require("bcryptjs");
 const cors = require("cors"); // Import CORS middleware
-console.log("My name is", process.env.myname);
 
 const app = express();
 
@@ -329,6 +329,9 @@ app.use("/owner", resByOwner);
 
 //AI chatbot
 app.use("/user", chatbot);
+
+//Hall Booking
+app.use("/user", booking);
 
 // issue req by user - user
 app.use("/user", issueReq);

@@ -78,6 +78,10 @@ const hallSchema = new mongoose.Schema(
         required: true,
       },
     },  
+    bookedDates: {
+      type: [Date],
+      default: [],
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
