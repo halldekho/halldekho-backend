@@ -62,7 +62,7 @@ router.post("/book-hall", authMiddleware, async (req, res) => {
         <h3>Hello ${owner.name},</h3>
         <p>User <b>${user.name}</b> has shortlisted your hall <b>${hall.name}</b> for the date <b>${bookingDate.toDateString()}</b>.</p>
         <p>Please contact the user for payment externally and click the following link to confirm booking:</p>
-        <a href="http://localhost:3000/confirm-booking">Confirm Booking</a>
+        <a href="https://halldekho.vercel.app/confirm-booking">Confirm Booking</a>
       `
     });
 
@@ -142,7 +142,7 @@ const confirmBookingHandler = async (req, res) => {
         <h3>Hello ${booking.userId.name},</h3>
         <p>Your booking for <b>${hall.name}</b> on <b>${new Date(booking.date).toDateString()}</b> has been <b>confirmed</b>.</p>
         <p>You can download your receipt here:</p>
-        <a href="http://localhost:5000/user/confirm-booking/${booking._id}" target="_blank">Download Receipt</a>
+        <a href="https://halldekho-backend-10.onrender.com/user/confirm-booking/${booking._id}" target="_blank">Download Receipt</a>
         <br><br><p>Regards,<br>Team Halldekho</p>
       `
     });
