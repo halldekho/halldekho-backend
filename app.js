@@ -22,6 +22,7 @@ const promotionalEmail = require('./routes/promotionalEmail');
 const blogRoutes = require("./routes/blogRoutes");
 const chatbot = require("./routes/chatbot");
 const booking = require("./routes/booking");
+const userProfile = require("./routes/userProfile");
 require("dotenv").config();
 
 const bcrypt = require("bcryptjs");
@@ -332,6 +333,9 @@ app.use("/user", chatbot);
 
 //Hall Booking
 app.use("/user", booking);
+
+//user Profile
+app.use("/user", userProfile);
 
 // issue req by user - user
 app.use("/user", issueReq);

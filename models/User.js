@@ -10,6 +10,14 @@ const userSchema = new mongoose.Schema({
   role: { type: String, required: true, enum: ROLES },
   resetPasswordToken: { type: String, default: null }, // Token for password reset
   resetPasswordExpires: { type: Date, default: null }, // Expiry for the token
+
+  
+  // Optional profile fields
+  name: { type: String },
+  mobile: { type: String },
+  address: { type: String },
+  state: { type: String },
+  country: { type: String },
 });
 
 // Static method to find user by email
